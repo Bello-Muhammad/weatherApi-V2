@@ -1,0 +1,153 @@
+doctype html
+html
+    head
+        - const metAttribute = {"charset": "UTF-8"}
+        meta&attributes(metAttribute)
+        - const secondAttribute = {"http-equiv": "X-UA-Compatible", "content":"IE=edge"}
+        meta&attributes(secondAttribute)
+        - const thirdAttribute = {"name": "viewport", "content": "width=device-width, initial-scale=1.0,maximum-scale=1"}
+        meta&attributes(thirdAttribute)
+        title 
+        link(rel="stylesheet", href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" type="text/css")
+        link(rel="stylesheet", href="fonts/font-awesome.min.css" type="text/css")
+        link(rel="stylesheet", href="/style.css")
+    body 
+
+        div.site-content 
+            div.site-header 
+                div.container 
+                    - const aClass = ["branding"]
+                    a(href="/" class=aClass) 
+                        -const imgAttribute = {"src": "/images/logo.png", "alt": ""}
+                        img.logo&attributes(imgAttribute)
+                        div.logo-type 
+                            h1.site-title Company name
+                            small.site-description tagline goes here
+                    
+                    //Default snippet for navigation 
+                    div.main-navigation 
+                        button(type="button" class="menu-toggle") 
+                            i(class ="fa fa-bars")
+                        ul.menu 
+                            li.menu-item.current-menu-item
+                                a(href="/api") Home  
+                            li.menu-item
+                                a(href="#") News 
+                            li.menu-item
+                                a(href="#l") Live Cameras
+                            li.menu-item
+                                a(href="#") Photos
+                            li.menu-item
+                                a(href="#") Contact
+                        //main-navigation
+
+                    div.mobile-navigation 
+            
+            - const euAttribute = {"data-bg-image" : "/images/banner.png"}
+            div.hero&attributes(euAttribute) 
+                div.container 
+                    form(action="/api/weather" method='get' class="find-location")
+                        input(type="text" name="city" placeholder="Check your location weather here...")
+                        input(type="submit" value="find")
+                                
+
+            div.forecast-table 
+                if location
+                    div(style="width: 50%").container 
+                        div.forecast-container 
+                            div.today.forecast(style="display:inline;")
+                                div.forecast-header
+                                    div.day  
+                                    div.date #{location.date} 
+                                div.forecast-content 
+                                    div.location #{location.place} 
+                                    div.degree
+                                        div.num #{location.temp}
+                                            sup o 
+                                            | C
+                                        div.forecast-icon
+                                            
+                                            img(src=`${location.icon}` width=90)
+                                div.forecast-content(style="display:block;")
+
+                                    span
+                                        -const oeAtt = {"src":"images/icon-umberella.png", "alt":""}
+                                        img&attributes(oeAtt) 
+                                        | #{location.clouds}%
+                                    span
+                                        -const woAtt = {"src":"images/icon-wind.png", "alt":""}
+                                        img&attributes(woAtt)
+                                        | #{location.speed}km/h
+                                    span
+                                        strong Desc.:- #{location.description}
+                                    span 
+                                        strong   Sunrise: #{location.sunrise} am    || 
+                                        strong Sunset: #{location.sunset} pm                
+                else 
+                    h1 Use the find form to check your location weather!
+
+            main.main-content 
+                div.fullwidth-block
+                    div.container
+                        div.row
+                            div.col-md-4
+                                h2.section-title Application features
+                                ul.arrow-feature
+                                    li 
+                                        h3 Redis (In-memory storage).
+                                    li
+                                        h3 openweathermap (Third-party api for retrieving forecast information).
+                                    li 
+                                        
+                            
+                            div.col-md-4 
+                                h2.section-title Weather analysis 
+                                ul.arrow-list
+                                    li 
+                                        h3 Weather data are retrived from 
+                                            a(href='http://openweathermap.org' style='color: green') openweathermap
+                                        
+                            
+                            div.col-md-4
+                                h2.section-title Awesome Photos
+                                div.photo-grid
+                                    a(href="#") 
+                                        -const thumb1Att = {"src":"/images/thumb-1.jpg", "alt":""} 
+                                        img&attributes(thumb1Att)
+                                    a(href="#") 
+                                        -const thumb2Att = {"src":"/images/thumb-2.jpg", "alt":""}
+                                        img&attributes(thumb2Att)
+                                    a(href="#")
+                                        -const thumb3Att = {"src":"/images/thumb-3.jpg", "alt":""}
+                                        img&attributes(thumb3Att)
+                                    a(href="#")
+                                        -const thumb4Att = {"src":"/images/thumb-4.jpg", "alt":""}
+                                        img&attributes(thumb4Att)
+                                    a(href="#")
+                                        -const thumb5Att = {"src":"/images/thumb-5.jpg", "alt":""}
+                                        img&attributes(thumb5Att)
+                                    a(href="#")
+                                        -const thumb6Att = {"src":"/images/thumb-6.jpg", "alt":""}
+                                        img&attributes(thumb6Att)
+                                    a(href="#")
+                                        -const thumb7Att = {"src":"images/thumb-7.jpg", "alt":""}
+                                        img&attributes(thumb4)
+
+
+            footer.site-footer 
+                .container 
+                    .row 
+                        .col-md-8 
+                            form(action="#" class="subscribe-form")
+                                input(type="text" placeholder="Enter your email to subscribe....")
+                                input(type="submit" value="subscribe") 
+                        .col-md-3.col-md-offset-1 
+                            .social-links 
+                                a(href="#"): i.fa.fa-facebook 
+                                a(href="#"): i.fa.fa-twitter
+                                a(href="#"): i.fa.fa-google-plus 
+                                a(href="#"): i.fa.fa-pinterest  
+        script(src="/js/jquery-1.11.1.min.js") 
+        script(src="/js/plugins.js")
+        script(src="/js/app.js") 
+
